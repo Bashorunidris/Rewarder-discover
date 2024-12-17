@@ -284,6 +284,28 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
+ .ad-container {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.ad-banner {
+    background: linear-gradient(45deg, #2196F3, #00BCD4);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.ad-banner:hover {
+    transform: scale(1.02);
+}
+
+.ad-link {
+    text-decoration: none;
+    color: white;
+}
 
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -807,6 +829,20 @@ main {
         margin: 1rem 0;
     }
 }
+  .share-telegram-btn {
+    background: #0088cc;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.share-telegram-btn:hover {
+    background: #006699;
+}
 
     </style>
 </head>
@@ -830,6 +866,17 @@ main {
          <a href="#calculator" class="explore-btn">Explore Now</a>
         </div>
     </div>
+    <a href="https://luglawhaulsano.net/4/8669278" target="_blank" rel="noopener noreferrer">Check out this offer!</a>
+
+    <div class="ad-container">
+    <a href="https://luglawhaulsano.net/4/8669278" class="ad-link" target="_blank" rel="noopener noreferrer">
+        <div class="ad-banner">
+
+            <p>Click here to learn more</p>
+        </div>
+    </a>
+</div>
+
     <div class="hero-shapes">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
@@ -1360,6 +1407,48 @@ class CryptoHub {
         setInterval(() => this.loadAllData(), API_CONFIG.cache.duration);
     }
 }
+ class TelegramBot {
+    constructor(token) {
+        this.token = token;
+        this.apiUrl = `https://api.telegram.org/bot${token}`;
+    }
+
+    async sendMessage(chatId, text) {
+        try {
+            const response = await fetch(`${this.apiUrl}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: 'HTML'
+                })
+            });
+            return await response.json();
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+    }
+
+    async setupWebhook(webhookUrl) {
+        try {
+            const response = await fetch(`${this.apiUrl}/setWebhook`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    url: webhookUrl
+                })
+            });
+            return await response.json();
+        } catch (error) {
+            console.error('Error setting webhook:', error);
+        }
+    }
+}
 
 // Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
@@ -1367,5 +1456,41 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
    </script>
+   <script>
+    // Initialize Telegram Bot
+    const bot = new TelegramBot('7668252172:AAFjOYpDLeJtImzPN5S3elfw0w-vvxTa83A');
+
+    // Add Telegram sharing functionality to your app
+    function shareToPrediction(prediction) {
+        const message = `
+🎯 New Prediction Alert!
+Match: ${prediction.match}
+Prediction: ${prediction.prediction}
+Confidence: ${prediction.confidence}%
+Odds: ${prediction.odds}
+`;
+
+        // Replace CHAT_ID with your Telegram channel or group ID
+        bot.sendMessage('7668252172', message);
+    }
+
+    // Add share buttons to prediction cards
+    function addShareButtons() {
+        const cards = document.querySelectorAll('.prediction-card');
+        cards.forEach(card => {
+            const shareBtn = document.createElement('button');
+            shareBtn.className = 'share-telegram-btn';
+            shareBtn.innerHTML = '📱 Share on Telegram';
+            shareBtn.onclick = () => shareToPrediction({
+                match: card.querySelector('h3').textContent,
+                prediction: card.querySelector('.prediction-details p').textContent,
+                confidence: card.querySelector('.confidence-badge').textContent,
+                odds: card.querySelector('.prediction-details p:last-child').textContent
+            });
+            card.appendChild(shareBtn);
+        });
+    }
+</script>
+
 </body>
 </html>
