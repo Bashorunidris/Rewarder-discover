@@ -1407,7 +1407,15 @@ class CryptoHub {
         setInterval(() => this.loadAllData(), API_CONFIG.cache.duration);
     }
 }
- class TelegramBot {
+  // Add this new method for Telegram integration
+    async sharePredictionToTelegram(prediction) {
+        const bot = new TelegramBot('7668252172:AAFjOYpDLeJtImzPN5S3elfw0w-vvxTa83A');
+        await bot.sendPrediction(prediction);
+    }
+}
+
+// Enhanced TelegramBot class
+class TelegramBot {
     constructor(token) {
         this.token = token;
         this.apiUrl = `https://api.telegram.org/bot${token}`;
@@ -1448,8 +1456,51 @@ class CryptoHub {
             console.error('Error setting webhook:', error);
         }
     }
+
+    async sendPrediction(prediction) {
+        const message = `
+🎯 New Prediction Alert!
+Match: ${prediction.match}
+Prediction: ${prediction.prediction}
+Confidence: ${prediction.confidence}%
+Odds: ${prediction.odds}
+`;
+        return this.sendMessage('YOUR_CHAT_ID', message);
+    }
 }
 
+// Initialize Application
+document.addEventListener('DOMContentLoaded', () => {
+    window.app = new CryptoHub();
+
+    // Initialize Telegram Bot
+    const bot = new TelegramBot('7668252172:AAFjOYpDLeJtImzPN5S3elfw0w-vvxTa83A');
+
+    // Set up webhook for your deployment
+    bot.setupWebhook('https://huss-view.vercel.app/api/webhook');
+
+    // Add Telegram sharing functionality
+    window.shareToPrediction = (prediction) => {
+        bot.sendPrediction(prediction);
+    }
+});
+
+// Add share buttons to prediction cards
+function addShareButtons() {
+    const cards = document.querySelectorAll('.prediction-card');
+    cards.forEach(card => {
+        const shareBtn = document.createElement('button');
+        shareBtn.className = 'share-telegram-btn';
+        shareBtn.innerHTML = '📱 Share on Telegram';
+        shareBtn.onclick = () => shareToPrediction({
+            match: card.querySelector('h3').textContent,
+            prediction: card.querySelector('.prediction-details p').textContent,
+            confidence: card.querySelector('.confidence-badge').textContent,
+            odds: card.querySelector('.prediction-details p:last-child').textContent
+        });
+        card.appendChild(shareBtn);
+    });
+}
 // Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
     window.app = new CryptoHub();
