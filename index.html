@@ -1789,31 +1789,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
    </script>
-    <script type="text/javascript">
-    function loadAd() {
-        // Create a new script tag for the Adsterra ad
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = "//causingparameterfavour.com/d2/d1/6a/d2d16af78c4e4bc865169db67bd8784f.js";
-
-        // Append the new script tag to the body or any specific container
-        document.body.appendChild(script);
-    }
-
-    // Load the first ad immediately
-    loadAd();
-
-    // Refresh the ad every 10 seconds (60000 ms / 6 = 10000 ms = 10 seconds)
-    setInterval(function() {
-        // Remove the previous script tag to avoid duplicates
-        var oldScript = document.querySelector('script[src="//causingparameterfavour.com/d2/d1/6a/d2d16af78c4e4bc865169db67bd8784f.js"]');
-        if (oldScript) {
-            oldScript.remove();
-        }
-
-        // Reload the ad by calling the loadAd function again
-        loadAd();
-    }, 10000); // 10000 ms = 10 seconds (6 times per minute)
-</script>
+    
 </body>
 </html>
