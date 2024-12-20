@@ -1408,74 +1408,7 @@ main {
          (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 </div>
-    <div class="ad-wrapper" onclick="trackAdClick()">
-    <script type="text/javascript">
-        atOptions = {
-            'key': 'd6f840f05df7232879dbc3b7048a82bc',
-            'format': 'iframe',
-            'height': 60,
-            'width': 468,
-            'params': {
-                'clicktrack': true,
-                'rotate': true,
-                'viewability': true,
-                'performance_tracking': true,
-                'click_reporting': true,
-                'engagement_tracking': true,
-                'auto_scale': true,
-                'revenue_tracking': true,
-                'placement_tracking': true
-            }
-        };
-    </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/d6f840f05df7232879dbc3b7048a82bc/invoke.js"></script>
-</div>
-
-<style>
-    .ad-wrapper {
-        position: relative;
-        z-index: 1000;
-        margin: 20px auto;
-        text-align: center;
-        min-height: 60px;
-        cursor: pointer;
-        transition: transform 0.2s;
-    }
-    .ad-wrapper:hover {
-        transform: scale(1.02);
-    }
-</style>
-
-<script>
-    function trackAdClick() {
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'ad_click', {
-                'event_category': 'Adsterra',
-                'event_label': 'Banner Click',
-                'value': 1
-            });
-        }
-        // Additional click tracking
-        if (typeof _paq !== 'undefined') {
-            _paq.push(['trackEvent', 'Advertising', 'AdsterraClick', 'Banner']);
-        }
-    }
-
-    // Enhanced visibility tracking
-    document.addEventListener('DOMContentLoaded', function() {
-        const adWrapper = document.querySelector('.ad-wrapper');
-        if (adWrapper) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.visibility = 'visible';
-                    }
-                });
-            });
-            observer.observe(adWrapper);
-        }
-    });
-</script>
+   
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2458879742838669"
     crossorigin="anonymous"></script>
 <script>
