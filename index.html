@@ -2,1807 +2,1290 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="google-adsense-account" content="ca-pub-2458879742838669">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto & Music Hub</title>
+    <title>Authentication - Student Registration System</title>
     <style>
-       /* Modern Root Variables */
-:root {
-    --primary: #2c3e50;
-    --secondary: #e74c3c;
-    --accent: #3498db;
-    --success: #2ecc71;
-    --warning: #f1c40f;
-    --background: #f8f9fa;
-    --text: #2c3e50;
-    --header-height: 70px;
+   :root {
+  --primary-color: #4a90e2;
+  --secondary-color: #f5f6fa;
+  --text-color: #2d3436;
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
 }
 
-/* Base Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.auth-container {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: var(--text);
-    background: var(--background);
+/* Auth Navigation */
+.auth-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--secondary-color);
 }
 
-/* Header & Navigation */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    backdrop-filter: blur(10px);
+.auth-tab {
+  padding: 1rem 2rem;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-.nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    height: var(--header-height);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.auth-tab.active {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    text-decoration: none;
+/* Forms */
+.auth-form {
+  display: none;
 }
 
-.nav-links {
-    display: flex;
-    gap: 2rem;
+.auth-form.active {
+  display: block;
 }
 
-.nav-links a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
-.nav-links a:hover {
-    color: var(--accent);
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
-.hero {
-    height: 100px;
-    background: linear-gradient(
-        135deg,
-        #2c3e50,
-        #3498db,
-        #e74c3c,
-        #2980b9
-    );
-    background-size: 300% 300%;
-    color: white;
-    display: flex;
+
+.input-wrapper i {
+  position: absolute;
+  left: 1rem;
+  color: #95a5a6;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  border: 2px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Password Toggle */
+.toggle-password {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #95a5a6;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.forgot-password {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* Auth Button */
+.auth-button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.auth-button:hover {
+  background: #357abd;
+  transform: translateY(-1px);
+}
+
+/* Photo Upload */
+.photo-upload-wrapper {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.photo-preview {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--secondary-color);
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-btn {
+  background: var(--secondary-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 auto;
+}
+
+/* Role Toggle */
+.role-toggle {
+  display: flex;
+  gap: 1rem;
+  background: var(--secondary-color);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+}
+
+.role-toggle input[type="radio"] {
+  display: none;
+}
+
+.role-toggle label {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.role-toggle input[type="radio"]:checked + label {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Password Strength Meter */
+.password-strength {
+  margin-top: 0.5rem;
+}
+
+.strength-meter {
+  height: 4px;
+  background: var(--secondary-color);
+  border-radius: 2px;
+  margin-bottom: 0.25rem;
+}
+
+.strength-text {
+  font-size: 0.875rem;
+  color: #95a5a6;
+}
+
+/* Notifications */
+#notificationContainer {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.notification {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--border-radius);
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notification.success {
+  border-left: 4px solid var(--success-color);
+}
+
+.notification.error {
+  border-left: 4px solid var(--error-color);
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+  .auth-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .auth-tab {
+    padding: 0.75rem 1rem;
+  }
+
+  .form-actions {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-    margin-top: var(--header-height);
-    position: relative;
-    overflow: hidden;
-    animation: gradientShift 12s ease infinite;
-}
-.hero h1 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 800;
-    margin-bottom: 0.3rem;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: titleReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.hero p {
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-    max-width: 700px;
-    line-height: 1.3;
-    font-weight: 400;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: textReveal 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
-}
-
-
-/* Floating Particles Effect */
-.hero::before,
-.hero::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image:
-        radial-gradient(circle at 50% 50%, white 0%, transparent 1%),
-        radial-gradient(circle at 30% 70%, white 0%, transparent 1%),
-        radial-gradient(circle at 70% 30%, white 0%, transparent 1%);
-    background-size: 120px 120px;
-    opacity: 0.3;
-    animation: particleFloat 15s linear infinite;
-}
-
-.hero::after {
-    animation-delay: -5s;
-    opacity: 0.2;
-    filter: blur(2px);
-}
-
-/* Text Container with Glow */
-.hero-content {
-    position: relative;
-    z-index: 2;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
-}
-
-.hero h1 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 800;
-    margin-bottom: 1rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: titleReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.hero p {
-    font-size: clamp(1rem, 1.5vw, 1.3rem);
-    max-width: 700px;
-    line-height: 1.4;
-    font-weight: 400;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: textReveal 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
-}
-  .explore-btn {
-    display: inline-block;
-    padding: 0.8em 2em;
-    background: transparent;
-    color: white;
-    font-weight: 600;
-    border: 2px solid white;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.explore-btn:hover {
-    background: white;
-    color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.explore-btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Highlight Words Animation */
-.hero h1 span {
-    display: inline-block;
-    position: relative;
-    color: #ffd700;
-    animation: sparkle 2s ease-in-out infinite;
-}
-
-/* Modern Animations */
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes particleFloat {
-    0% { transform: translateY(0) translateX(0); }
-    100% { transform: translateY(-100px) translateX(100px); }
-}
-
-@keyframes titleReveal {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes textReveal {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 0.9;
-        transform: translateY(0);
-    }
-}
-
-@keyframes sparkle {
-    0%, 100% { filter: brightness(100%); }
-    50% { filter: brightness(130%) drop-shadow(0 0 3px rgba(255, 215, 0, 0.7)); }
-}
-
-/* Hover Effects */
-.hero:hover::before {
-    animation-play-state: paused;
-}
-
-/* Media Queries */
-@media (min-width: 1400px) {
-    .hero {
-        height: 50vh;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        height: 40vh;
-        padding: 1rem;
-    }
-
-    .hero::before,
-    .hero::after {
-        background-size: 80px 80px;
-    }
-}
-
-/* Interactive Elements */
-.hero-cta {
-    margin-top: 2rem;
-    opacity: 0;
-    animation: fadeIn 1s ease 0.6s forwards;
-}
-
-.hero-cta button {
-    padding: 0.8em 2em;
-    border: 2px solid white;
-    background: transparent;
-    color: white;
-    font-weight: 600;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.hero-cta button:hover {
-    background: white;
-    color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
- .ad-container {
-    max-width: 500px;
-    margin: 20px auto;
-}
-
-.ad-banner {
-    background: linear-gradient(45deg, #2196F3, #00BCD4);
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.2s;
-}
-
-.ad-banner:hover {
-    transform: scale(1.02);
-}
-
-.ad-link {
-    text-decoration: none;
-    color: white;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Main Content Sections */
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 20px;
-}
-
-.section {
-    margin: 3rem 0;
-    padding: 2rem;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Crypto Table */
-.crypto-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-}
-
-.crypto-table th,
-.crypto-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
-.crypto-table th {
-    background: var(--primary);
-    color: white;
-}
-
-.crypto-table tr:hover {
-    background: #f8f9fa;
-}
-
-/* Music Grid */
-.music-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.music-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.music-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.music-card:hover {
-    transform: translateY(-5px);
-}
-
-.music-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-/* Calculator Sections */
-.calculator {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.calculator-input-group {
-    margin-bottom: 1.5rem;
-}
-
-.calculator-input-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-.calculator-select,
-.calculator-input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-.calculator-actions {
-    display: flex;
     gap: 1rem;
-    margin: 1.5rem 0;
+    align-items: flex-start;
+  }
+}
+/* Initial Dashboard State */
+.dashboard-container {
+  display: none;
 }
 
-.calculate-btn,
-.reset-btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.dashboard-container.hoc-active {
+  display: block;
+  min-height: 100vh;
+  background: #f8fafc;
 }
 
-.calculate-btn {
-    background: var(--accent);
-    color: white;
-    flex: 2;
+/* Dashboard Navigation */
+.dashboard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.reset-btn {
-    background: var(--warning);
-    color: var(--primary);
-    flex: 1;
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-
-
-  /* Currency Converter Styles */
-.converter-container {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+.nav-brand img {
+  height: 40px;
+  width: auto;
 }
 
-.converter-input, .converter-output {
-    display: flex;
-    gap: 1rem;
-    margin: 1rem 0;
+.nav-tabs {
+  display: flex;
+  gap: 1rem;
 }
 
-.converter-input input, .converter-output input {
-    flex: 2;
-    padding: 1rem;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    font-size: 1.1rem;
+.nav-tab {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  color: #64748b;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.converter-input select, .converter-output select {
-    flex: 1;
-    padding: 1rem;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    cursor: pointer;
+.nav-tab.active {
+  background: #4f46e5;
+  color: white;
 }
 
-#switchCurrency {
-    display: block;
-    margin: 1rem auto;
-    padding: 0.5rem 1rem;
-    border: none;
-    background: transparent;
-    font-size: 1.5rem;
-    cursor: pointer;
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.convert-btn {
-    width: 100%;
-    padding: 1rem;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-/* Live Sports Styles */
-.sports-container {
-    background: white;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+.profile-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.sports-filters {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
+/* Create Space Form */
+.create-space-form {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.sports-filters select {
-    padding: 0.8rem;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    cursor: pointer;
+.create-space-form h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  color: #1e293b;
 }
 
-.live-scores {
-    display: grid;
-    gap: 1rem;
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
-.score-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid var(--accent);
+/* Course Inputs */
+.course-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.team-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.course-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
 }
 
-.score {
-    font-size: 1.5rem;
-    font-weight: bold;
+.course-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
 }
 
-.match-status {
-    padding: 0.3rem 0.8rem;
-    background: var(--success);
-    color: white;
-    border-radius: 20px;
-    font-size: 0.9rem;
-}
-/* Responsive Feature Sections */
-.converter-container, .sports-container {
-    max-width: min(90%, 600px);
-    margin: 2rem auto;
-    padding: clamp(1rem, 3vw, 2rem);
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+/* Timer Settings */
+.timer-settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
-.converter-input, .converter-output {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1rem 0;
+select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
 }
 
-.converter-input input,
-.converter-output input {
-    flex: 1 1 150px;
-    min-width: 150px;
-    padding: 0.8rem;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    font-size: 1rem;
+/* Color Picker */
+.color-picker {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.converter-input select,
-.converter-output select {
-    flex: 0 1 100px;
-    padding: 0.8rem;
-    border: 2px solid #eee;
-    border-radius: 8px;
+.color-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: 2px solid #e2e8f0;
 }
 
-/* Sports Section Responsive */
-.sports-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-bottom: 1.5rem;
+/* Auto-Sign Toggle */
+.auto-sign-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.score-card {
-    padding: clamp(0.8rem, 2vw, 1.2rem);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
+/* Create Space Button */
+.create-space-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.team-info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    align-items: center;
-    text-align: center;
-}
-
-@media (max-width: 480px) {
-    .team-info {
-        font-size: 0.9rem;
-    }
-
-    .score {
-        font-size: 1.2rem;
-    }
-}
- .predictions-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-}
-
-.prediction-filters {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.prediction-filters select {
-    padding: 0.8rem;
-    border-radius: 8px;
-    border: 2px solid #eee;
-    flex: 1;
-    min-width: 200px;
-}
-
-.predictions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-}
-
-.prediction-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.prediction-card:hover {
-    transform: translateY(-5px);
-}
-
-.prediction-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.confidence-indicator {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.confidence-high {
-    background: #4CAF50;
-    color: white;
-}
-
-.confidence-medium {
-    background: #FFC107;
-    color: black;
-}
-
-.confidence-value {
-    background: #2196F3;
-    color: white;
-}
-
-.prediction-stats {
-    display: grid;
-    gap: 0.8rem;
-    margin: 1rem 0;
-}
-
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-    background: #f8f9fa;
-    border-radius: 6px;
-}
-
-.social-trading {
-    background: white;
-    border-radius: 12px;
-    padding: 2rem;
-    margin-top: 2rem;
-}
-
-.traders-list {
-    display: grid;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.trader-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.trader-card:hover {
-    background: #e9ecef;
-}
-
-.trader-stats {
-    margin-left: auto;
-    text-align: right;
-}
-
-@media (max-width: 768px) {
-    .prediction-filters select {
-        width: 100%;
-    }
-
-    .predictions-grid {
-        grid-template-columns: 1fr;
-    }
+.create-space-btn:hover {
+  background: #4338ca;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .nav {
-        flex-direction: column;
-        height: auto;
-        padding: 1rem;
-    }
-
-    .nav-links {
-        margin-top: 1rem;
-        gap: 1rem;
-    }
-
-    .hero {
-        height: 50vh;
-        margin-top: 100px;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .section {
-        padding: 1rem;
-    }
-
-    .crypto-table {
-        font-size: 0.9rem;
-    }
-
-    .calculator-actions {
-        flex-direction: column;
-    }
-
-    .calculate-btn,
-    .reset-btn {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 1.5rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .music-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section {
-        margin: 1rem 0;
-    }
-}
-
-/* Modern Chart Section Styling */
-.chart-section {
-    background: linear-gradient(135deg, #1E1E1E, #2D2D2D);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
-/* Platform Selector */
-.platform-selector {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
+  .dashboard-nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .nav-tabs {
+    width: 100%;
     overflow-x: auto;
-    padding: 5px;
+  }
+  
+  .timer-settings {
+    grid-template-columns: 1fr;
+  }
+}
+.student-dashboard {
+  min-height: 100vh;
+  background: #f8fafc;
 }
 
-.platform-selector button {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    padding: 12px 24px;
-    border-radius: 50px;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
+/* Dashboard Header */
+.student-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.platform-selector button.active {
-    background: #1DB954;
-    box-shadow: 0 0 20px rgba(29,185,84,0.3);
+.student-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.platform-selector button:hover {
-    transform: translateY(-2px);
-    background: rgba(255,255,255,0.2);
+.student-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4f46e5;
 }
 
-/* Country Search */
-.country-search {
-    margin: 20px 0;
+.student-info {
+  display: flex;
+  flex-direction: column;
 }
 
-.country-search input {
-    width: 100%;
-    padding: 15px 20px;
-    border-radius: 12px;
-    border: 2px solid rgba(255,255,255,0.1);
-    background: rgba(0,0,0,0.2);
-    color: #fff;
-    font-size: 16px;
+.student-name {
+  font-weight: 600;
+  color: #1e293b;
 }
 
-.trending-countries {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    flex-wrap: wrap;
+.student-email {
+  font-size: 0.875rem;
+  color: #64748b;
 }
 
-.trending-countries span {
-    background: rgba(255,255,255,0.1);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* Search Section */
+.search-section {
+  padding: 2rem;
+  background: white;
+  margin: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.trending-countries span:hover {
-    background: rgba(255,255,255,0.2);
-    transform: translateY(-2px);
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Chart Display */
-.chart-display {
-    margin: 25px 0;
-    position: relative;
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
-.chart-embed {
-    background: rgba(0,0,0,0.2);
-    border-radius: 15px;
-    overflow: hidden;
-    transition: all 0.3s ease;
+.search-input:focus {
+  border-color: #4f46e5;
+  outline: none;
 }
 
-.chart-embed:hover {
-    transform: scale(1.01);
+/* Spaces Grid */
+.spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
 }
 
-.chart-embed iframe {
-    border-radius: 12px;
-    transition: opacity 0.3s ease;
+.space-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Live Stats */
-.chart-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    margin-top: 25px;
+.space-card:hover {
+  transform: translateY(-4px);
 }
 
-.stat-item {
-    background: rgba(255,255,255,0.05);
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    transition: all 0.3s ease;
+.space-header {
+  padding: 1.5rem;
+  background: var(--space-color, #4f46e5);
+  color: white;
 }
 
-.stat-item:hover {
-    background: rgba(255,255,255,0.1);
-    transform: translateY(-3px);
+.space-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-.stat-label {
-    display: block;
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 5px;
+.space-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
 }
 
-.stat-value {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+.space-content {
+  padding: 1.5rem;
 }
 
-/* Loading Animation */
-.loading {
-    position: relative;
-    overflow: hidden;
+.course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.loading::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255,255,255,0.1),
-        transparent
-    );
-    animation: loading 1.5s infinite;
+.course-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 6px;
 }
 
-@keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+.course-name {
+  font-weight: 500;
+}
+
+.course-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* Action Buttons */
+.space-actions {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.action-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #4338ca;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .chart-section {
-        padding: 15px;
-    }
+  .student-nav {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    .platform-selector {
-        padding-bottom: 10px;
-    }
+  .search-section {
+    margin: 1rem;
+  }
 
-    .stat-item {
-        padding: 10px;
-    }
-
-    .stat-value {
-        font-size: 20px;
-    }
+  .spaces-grid {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+  }
+}
+/* Dashboard Layout */
+.dashboard-container2 {
+  min-height: 100vh;
+  background: #f8fafc;
 }
 
-/* Dark Mode Enhancement */
-@media (prefers-color-scheme: dark) {
-    .chart-section {
-        background: linear-gradient(135deg, #121212, #1E1E1E);
-    }
+/* Navigation Styles */
+.dashboard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.chart-section * {
-    animation: fadeIn 0.5s ease-out forwards;
+.nav-brand img {
+  height: 40px;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+.nav-tabs {
+  display: flex;
+  gap: 1.5rem;
 }
 
-::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0.1);
-    border-radius: 4px;
+.nav-tab {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.2);
-    border-radius: 4px;
+.nav-tab.active {
+  background: #4f46e5;
+  color: white;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,0.3);
+/* Profile Section */
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.pulse-button {
-    display: block;
-    background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-    color: white;
-    text-align: center;
-    padding: 15px 30px;
-    border-radius: 50px;
-    font-size: 1.3em;
-    font-weight: bold;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    animation: pulse 2s infinite;
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Animations */
-@keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.profile-info img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,107,107,0.4); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(255,107,107,0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,107,107,0); }
+.student-details {
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes numberPop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+.student-name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.matric-number {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+/* Space Search */
+.space-search {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  background: white;
+  margin: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.search-wrapper i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+#spaceSearch {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+/* Voucher Cards */
+.voucher-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.voucher-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.voucher-card:hover {
+  transform: translateY(-5px);
+}
+
+.voucher-header {
+  margin-bottom: 1.5rem;
+}
+
+.voucher-features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.voucher-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.voucher-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4f46e5;
+  margin: 1.5rem 0;
+}
+
+/* Auto Sign Section */
+.subscription-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.subscription-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Buttons */
+.purchase-btn, .subscribe-btn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.purchase-btn:hover, .subscribe-btn:hover {
+  background: #4338ca;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
 }
 
 /* Responsive Design */
-@media (min-width: 768px) {
-    .music-banner {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .chart-section {
-        grid-column: 1 / -1;
-    }
-}
-
-@media (min-width: 1024px) {
-    .music-banner {
-        grid-template-columns: 2fr 1fr 1fr;
-    }
-
-    .chart-section {
-        grid-column: auto;
-    }
-
-    .pulse-button {
-        grid-column: 1 / -1;
-    }
-}
-
-/* Hover Effects */
-.music-banner:hover .chart-section {
-    transform: perspective(1000px) rotateX(10deg);
-}
-
-.pulse-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    background: linear-gradient(45deg, #4ECDC4, #FF6B6B);
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    .music-banner {
-        background: linear-gradient(45deg, #2C3E50, #000000);
-    }
-}
-
-/* Loading Animation */
-.loading {
-    position: relative;
-}
-
-.loading::after {
-    content: '';
-    position: absolute;
+@media (max-width: 768px) {
+  .dashboard-nav {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .nav-tabs {
     width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(90deg, transparent, #fff, transparent);
-    animation: loading 1.5s infinite;
+    overflow-x: auto;
+    padding: 0.5rem;
+  }
+  
+  .space-search {
+    flex-direction: column;
+    margin: 1rem;
+  }
 }
 
-@keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
 
     </style>
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">Crypto & Music Hub</div>
-            <div class="nav-links">
-                <a href="#crypto">Crypto</a>
-                <a href="https://causingparameterfavour.com/hs6i2cpr?key=b4a49a56991ec03009d46bda33abc4d3">FreeCash</a>
-                <a href="#music">Music</a>
-                <a href="https://causingparameterfavour.com/hs6i2cpr?key=b4a49a56991ec03009d46bda33abc4d3">Calculator</a>
-            </div>
-        </nav>
-    </header>
-
-    <section class="hero">
-    <div class="hero-content">
-        <h1><span class="highlight">Track</span> Crypto & Music <span class="highlight">Trends</span></h1>
-        <p>Your one-stop platform for <span class="accent">cryptocurrency</span> prices and <span class="accent">music</span> charts</p>
-        <div class="hero-cta">
-         <a href="https://www.profitablecpmrate.com/nkb6ipfi?key=3631b4c085cc900213f25d194204219c" class="explore-btn">Explore Now</a>
-        </div>
-    </div>
-
-
-    <div class="hero-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-    </div>
-</section>
-
-    <main>
-        <section id="crypto" class="section">
-            <h2>Cryptocurrency Prices</h2>
-            <div class="ad-space"><a href="" rel="nofollow"><img alt="banner" src="https://landings-cdn.adsterratech.com/referralBanners/gif/120x60_adsterra_reff.gif" /></a> </div>
-            <table class="crypto-table" id="cryptoTable">
-                <thead>
-                    <tr>
-                        <th>Coin</th>
-                        <th>Price</th>
-                        <th>24h Change</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </section>
-<script type="text/javascript">
- atOptions = {
-  'key' : 'e0b487b53e3b47eebf112766a40a695a',
-  'format' : 'iframe',
-  'height' : 50,
-  'width' : 320,
-  'params' : {}
- };
-</script>
-<script type="text/javascript" src="//causingparameterfavour.com/e0b487b53e3b47eebf112766a40a695a/invoke.js"></script>
-        <section id="music" class="section">
-    <h2>Top Music Charts</h2>
-    <div class="music-banner">
-    <!-- Live Music Charts -->
-   <div class="chart-section">
-    <!-- Platform Selector -->
-    <div class="platform-selector">
-        <button data-platform="spotify" class="active">Spotify</button>
-        <button data-platform="apple">Apple Music</button>
-        <button data-platform="audiomack">Audiomack</button>
-        <button data-platform="boomplay">Boomplay</button>
-    </div>
-
-    <!-- Country Search -->
-    <div class="country-search">
-        <input type="search" placeholder="Search country (e.g., Nigeria, Ghana, UK)" id="countrySearch">
-        <div class="trending-countries">
-            <span>#Nigeria</span>
-            <span>#Ghana</span>
-            <span>#Kenya</span>
-            <span>#Global</span>
-        </div>
-    </div>
-
-    <!-- Dynamic Chart Display -->
-    <div class="chart-display">
-        <!-- Spotify Global -->
-        <div class="chart-embed" data-region="global">
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZEVXbMDoHDwVN2tF" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <div class="auth-container">
+        <!-- Auth Navigation -->
+        <div class="auth-nav">
+            <button class="auth-tab active" data-tab="signin">Sign In</button>
+            <button class="auth-tab" data-tab="signup">Sign Up</button>
         </div>
 
-        <!-- Spotify Nigeria -->
-        <div class="chart-embed" data-region="nigeria">
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZEVXbKY7jLzlJ11V" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-
-        <!-- Audiomack Africa -->
-        <div class="chart-embed" data-region="africa">
-            <iframe src="https://audiomack.com/embed/playlist/audiomack/top-afrobeats" width="100%" height="380" frameborder="0" scrolling="no"></iframe>
-        </div>
-        <!-- Boomplay Nigeria -->
-        <div class="chart-embed" data-region="boomplay-ng">
-              <iframe src="https://audiomack.com/embed/playlist/audiomack/top-afrobeats" width="100%" height="380" frameborder="0" scrolling="no"></iframe>
-
-        </div>
-    </div>
-
-
-    <!-- Live Stats -->
-    <div class="chart-stats">
-        <div class="stat-item">
-            <span class="stat-label">🔥 Trending</span>
-            <span class="stat-value" id="trendingCount">Loading...</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">🌍 Countries</span>
-            <span class="stat-value" id="countryCount">Loading...</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">🎵 Total Tracks</span>
-            <span class="stat-value" id="trackCount">Loading...</span>
-        </div>
-    </div>
-</div>
-
-
-    <!-- Music Stats Counter -->
-    <div class="stats-counter">
-        <span id="listeners">🎧 Live Listeners: <span data-value="0">0</span></span>
-        <span id="tracks">🎵 Tracks Today: <span data-value="0">0</span></span>
-    </div>
-
-    <!-- Action Button -->
-    <a href="" class="pulse-button" rel="nofollow">
-        <img src="https://www.profitablecpmrate.com/nkb6ipfi?key=3631b4c085cc900213f25d194204219c"
-             alt="Trending Music Inside"
-             style="display:none">
-        🎵 Discover Top Charts Now! 🎵
-    </a>
-</div>
-
-
-
-</section>
-
-<section id="calculator" class="section">
-    <h2>Creator Earnings Calculator</h2>
-    <div class="calculator">
-        <div class="calculator-input-group">
-            <label for="platform">Select Platform</label>
-            <select id="platform" class="calculator-select">
-                <option value="tiktok">TikTok</option>
-                <option value="youtube">YouTube</option>
-                <option value="instagram">Instagram</option>
-            </select>
-        </div>
-
-        <div class="calculator-input-group">
-            <label for="views">View Count</label>
-            <input type="number"
-                   id="views"
-                   class="calculator-input"
-                   placeholder="Enter number of views"
-                   min="0"
-                   step="1000">
-        </div>
-
-        <div class="calculator-actions">
-            <button id="calculateBtn" class="calculate-btn">Calculate Earnings</button>
-            <button id="resetBtn" class="reset-btn">Reset</button>
-        </div>
-
-        <div id="result" class="calculator-result fade-in">
-            <div class="earnings-display"></div>
-            <div class="conversion-rates"></div>
-            <div class="earnings-breakdown"></div>
-        </div>
-    </div>
-</section>
-
-    </main>
-    <section id="streaming-calculator" class="section">
-    <h2>Music Streaming Earnings Calculator</h2>
-    <div class="calculator streaming-calculator">
-        <div class="calculator-input-group">
-            <label for="streamPlatform">Streaming Platform</label>
-            <select id="streamPlatform" class="calculator-select">
-                <option value="spotify">Spotify</option>
-                <option value="apple">Apple Music</option>
-                <option value="youtube-music">YouTube Music</option>
-                <option value="amazon">Amazon Music</option>
-                <option value="tidal">Tidal</option>
-                <option value="deezer">Deezer</option>
-            </select>
-        </div>
-
-        <div class="calculator-input-group">
-            <label for="streams">Number of Streams</label>
-            <input type="number"
-                   id="streams"
-                   class="calculator-input"
-                   placeholder="Enter number of streams"
-                   min="0"
-                   step="1000">
-        </div>
-
-        <div class="calculator-actions">
-            <button id="calculateStreamBtn" class="calculate-btn">Calculate Streaming Revenue</button>
-            <button id="resetStreamBtn" class="reset-btn">Reset</button>
-        </div>
-
-        <div id="streamResult" class="calculator-result fade-in"></div>
-    </div>
-</section>
-   <!-- Add this after your existing sections -->
-<section id="currency" class="section">
-    <h2>Currency Converter</h2>
-    <div class="converter-container">
-        <div class="converter-input">
-            <input type="number" id="amount" placeholder="Enter amount">
-            <select id="fromCurrency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="JPY">JPY</option>
-                <option value="NGN">NGN</option>
-            </select>
-        </div>
-        <button id="switchCurrency">↔️</button>
-        <div class="converter-output">
-            <input type="number" id="result" readonly>
-            <select id="toCurrency">
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="GBP">GBP</option>
-                <option value="JPY">JPY</option>
-                <option value="NGN">NGN</option>
-            </select>
-        </div>
-        <button id="convertBtn" class="convert-btn">Convert</button>
-    </div>
-</section>
-
-<section id="sports" class="section">
-    <h2>Live Sports Scores</h2>
-    <div class="sports-container">
-        <div class="sports-filters">
-            <select id="sportType">
-                <option value="soccer">Soccer</option>
-                <option value="basketball">Basketball</option>
-                <option value="tennis">Tennis</option>
-            </select>
-            <button id="refreshScores" class="refresh-btn">🔄 Refresh</button>
-        </div>
-        <div class="live-scores" id="liveScores">
-            <!-- Scores will be populated dynamically -->
-        </div>
-    </div>
-</section>
-   <!-- Add this new section -->
-<section id="predictions" class="section">
-    <h2>Smart Sports Predictions</h2>
-
-    <div class="predictions-container">
-        <!-- Category Selector -->
-        <div class="prediction-filters">
-            <select id="predictionType">
-                <option value="over_under">Over/Under</option>
-                <option value="goals">Goals Range</option>
-                <option value="halftime">Half-Time Result</option>
-                <option value="bookings">Cards & Bookings</option>
-                <option value="corners">Corner Markets</option>
-                <option value="player">Player Performance</option>
-                <option value="special">Special Markets</option>
-                <option value="home_goals">Home Team Goals</option>
-                <option value="away_goals">Away Team Goals</option>
-            </select>
-
-            <select id="confidence">
-                <option value="high">High Confidence</option>
-                <option value="medium">Medium Risk</option>
-                <option value="value">Value Bets</option>
-            </select>
-        </div>
-
-        <!-- AI Predictions Display -->
-        <div class="predictions-grid" id="predictionsGrid"></div>
-
-        <!-- Social Trading Section -->
-        <div class="social-trading">
-            <h3>Top Traders & Tipsters</h3>
-            <div class="traders-list" id="tradersList"></div>
-        </div>
-    </div>
-</section>
-<!-- Ad placement -->
-<div class="ad-container">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890"></script>
-    <ins class="adsbygoogle"
-            style="display:block; cursor: pointer;"
-            data-ad-client="ca-pub-2458879742838669"
-            data-ad-slot="3494358496"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-            onclick="window.open('YOUR_GOOGLE_AD_LINK', '_blank')">
-        </ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-  <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'wqkigc4l3c',
-    });
-</script> 
- 
-// Live data fetching
-const updateCharts = () => {
-    fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('trendingCount').textContent = data.followers.total.toLocaleString();
-            document.getElementById('trackCount').textContent = data.tracks.total.toLocaleString();
-        });
-
-    // Simulate country count for demo
-    document.getElementById('countryCount').textContent = '180+';
-};
-
-// Update every 30 seconds
-setInterval(updateCharts, 30000);
-updateCharts();
-
-// Platform switching
-document.querySelectorAll('.platform-selector button').forEach(button => {
-    button.addEventListener('click', () => {
-        document.querySelectorAll('.platform-selector button').forEach(b => b.classList.remove('active'));
-        button.classList.add('active');
-        // Switch iframe source based on platform
-    });
-});
-
-// Country search functionality
-document.getElementById('countrySearch').addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    // Filter and display relevant charts
-});
-</script>
-   <script type="text/javascript">
- atOptions = {
-  'key' : 'd6f840f05df7232879dbc3b7048a82bc',
-  'format' : 'iframe',
-  'height' : 60,
-  'width' : 468,
-  'params' : {}
- };
-</script>
-<script type="text/javascript" src="//causingparameterfavour.com/d6f840f05df7232879dbc3b7048a82bc/invoke.js"></script> 
- <script>
-
-   // API Configuration
-const API_CONFIG = {
-    endpoints: {
-        crypto: 'https://api.coincap.io/v2/assets',
-        exchange: 'https://open.er-api.com/v6/latest/USD',
-        music: 'https://api.deezer.com/chart/0/tracks',
-        sports: 'https://www.scorebat.com/video-api/v3/feed',
-        odds: 'https://odds.data.api.sportradar.us/sample/feed'
-    },
-    websocket: {
-        crypto: 'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,dogecoin',
-        sports: 'wss://ws.scorebat.com/socket'
-    },
-    params: {
-        crypto: '?limit=10',
-        music: '?limit=6'
-    },
-    cache: {
-        duration: 10000,
-        data: new Map()
-    }
-};
-
-const PLATFORM_RATES = {
-    youtube: { viewRate: 0.00188, subscriberRate: 4.00, multiplier: 1.2 },
-    tiktok: { viewRate: 0.00073, followerRate: 2.00, multiplier: 1.5 },
-    instagram: { viewRate: 0.02, followerRate: 3.00, multiplier: 1.3 }
-};
-
-const STREAMING_RATES = {
-    spotify: { rate: 0.00437, name: 'Spotify', color: '#1DB954' },
-    apple: { rate: 0.00735, name: 'Apple Music', color: '#FC3C44' },
-    'youtube-music': { rate: 0.00676, name: 'YouTube Music', color: '#FF0000' },
-    amazon: { rate: 0.00402, name: 'Amazon Music', color: '#00A8E1' },
-    tidal: { rate: 0.00876, name: 'Tidal', color: '#000000' },
-    deezer: { rate: 0.00562, name: 'Deezer', color: '#00C7F2' }
-};
-
-const AVAILABLE_CURRENCIES = {
-    USD: { symbol: '$', name: 'US Dollar' },
-    EUR: { symbol: '€', name: 'Euro' },
-    GBP: { symbol: '£', name: 'British Pound' },
-    JPY: { symbol: '¥', name: 'Japanese Yen' },
-    NGN: { symbol: '₦', name: 'Nigerian Naira' }
-};
-
-const PREDICTION_CONFIG = {
-    confidence: {
-        high: 0.75,
-        medium: 0.5,
-        low: 0.25
-    },
-    factors: {
-        recentForm: 0.3,
-        headToHead: 0.3,
-        currentForm: 0.25,
-        injuries: 0.15
-    }
-};
-
-class CryptoHub {
-    constructor() {
-        this.state = {
-            crypto: [],
-            exchange: {},
-            music: [],
-            sports: [],
-            predictions: new Map(),
-            lastUpdate: null,
-            selectedCurrencies: ['USD', 'EUR', 'GBP', 'NGN']
-        };
-        this.init();
-    }
-
-    async init() {
-        this.initializeCache();
-        this.initializeSockets();
-        this.initializeCurrencySelector();
-        await this.loadAllData();
-        this.setupEventListeners();
-        this.startAutoRefresh();
-    }
-
-    initializeCache() {
-        if ('caches' in window) {
-            caches.open('crypto-hub-cache').then(cache => {
-                this.cache = cache;
-            });
-        }
-    }
-
-    initializeSockets() {
-        this.cryptoWs = new WebSocket(API_CONFIG.websocket.crypto);
-        this.cryptoWs.onmessage = (msg) => {
-            const data = JSON.parse(msg.data);
-            this.updateCryptoPrices(data);
-        };
-
-        this.sportsWs = new WebSocket(API_CONFIG.websocket.sports);
-        this.sportsWs.onmessage = (msg) => {
-            const data = JSON.parse(msg.data);
-            this.updateSportsData(data);
-        };
-    }
-
-    initializeCurrencySelector() {
-        const selector = document.getElementById('currencySelector');
-        if (selector) {
-            selector.innerHTML = Object.entries(AVAILABLE_CURRENCIES)
-                .map(([code, currency]) =>
-                    `<option value="${code}">${currency.name} (${currency.symbol})</option>`)
-                .join('');
-        }
-    }
-
-    async fetchWithCache(endpoint, params = '') {
-        const url = endpoint + params;
-        const cacheKey = `${url}_${Date.now()}`;
-
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.warn(`Fetch failed for ${url}:`, error);
-            return null;
-        }
-    }
-
-    async loadAllData() {
-        try {
-            const [cryptoData, exchangeData, musicData, sportsData] = await Promise.all([
-                this.fetchWithCache(API_CONFIG.endpoints.crypto + API_CONFIG.params.crypto),
-                this.fetchWithCache(API_CONFIG.endpoints.exchange),
-                this.fetchWithCache(API_CONFIG.endpoints.music + API_CONFIG.params.music),
-                this.fetchWithCache(API_CONFIG.endpoints.sports)
-            ]);
-
-            this.updateState(cryptoData, exchangeData, musicData, sportsData);
-            this.renderAll();
-        } catch (error) {
-            console.warn('Error loading data:', error);
-            this.loadFallbackData();
-        }
-    }
-
-    updateState(cryptoData, exchangeData, musicData, sportsData) {
-        this.state = {
-            ...this.state,
-            crypto: cryptoData?.data || [],
-            exchange: exchangeData?.rates || {},
-            music: musicData?.tracks?.data || [],
-            sports: sportsData?.response || [],
-            lastUpdate: new Date()
-        };
-    }
-
-    renderAll() {
-        requestAnimationFrame(() => {
-            this.renderCryptoTable();
-            this.renderMusicGrid();
-            this.renderSportsData();
-            this.renderPredictions();
-            this.updateLastRefreshTime();
-        });
-    }
-
-    renderCryptoTable() {
-        const tbody = document.querySelector('#cryptoTable tbody');
-        if (!tbody) return;
-
-        tbody.innerHTML = this.state.crypto.map(coin => `
-            <tr class="fade-in">
-                <td>${coin.name} (${coin.symbol})</td>
-                <td>$${Number(coin.priceUsd).toFixed(2)}</td>
-                <td class="${Number(coin.changePercent24Hr) > 0 ? 'positive' : 'negative'}">
-                    ${Number(coin.changePercent24Hr).toFixed(2)}%
-                </td>
-            </tr>
-        `).join('');
-    }
-
-    renderMusicGrid() {
-        const grid = document.getElementById('musicGrid');
-        if (!grid) return;
-
-        grid.innerHTML = this.state.music.map(track => `
-            <div class="music-card fade-in">
-                <img loading="lazy" src="${track.album.cover_medium}" alt="${track.title}">
-                <h3>${track.title}</h3>
-                <p>${track.artist.name}</p>
-                <div class="track-stats">
-                    <span>Rank: #${track.position}</span>
-                    <span>Duration: ${Math.floor(track.duration/60)}:${(track.duration % 60).toString().padStart(2, '0')}</span>
+        <!-- Sign In Form -->
+        <form id="signinForm" class="auth-form active">
+            <h2>Welcome Back!</h2>
+            
+            <div class="form-group">
+                <label for="signInEmail">Email</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="signInEmail" required>
                 </div>
             </div>
-        `).join('');
-    }
 
-    renderSportsData() {
-        const container = document.getElementById('liveScores');
-        if (!container) return;
-
-        container.innerHTML = this.state.sports.map(match => `
-            <div class="score-card">
-                <div class="team-info">
-                    <span>${match.home}</span>
-                    <span class="score">${match.score || '0-0'}</span>
-                    <span>${match.away}</span>
-                </div>
-                <span class="match-status">${match.status}</span>
-            </div>
-        `).join('');
-    }
-
-    calculateEarnings() {
-        const platform = document.getElementById('platform').value;
-        const views = parseInt(document.getElementById('views').value) || 0;
-        const rates = PLATFORM_RATES[platform];
-        const earnings = views * rates.viewRate * rates.multiplier;
-
-        document.getElementById('result').innerHTML = `
-            <div class="earnings-card">
-                <h3>Estimated Earnings</h3>
-                <div class="amount">$${earnings.toFixed(2)}</div>
-                <div class="converted-amounts">
-                    ${this.renderCurrencyConversions(earnings)}
+            <div class="form-group">
+                <label for="signInPassword">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="signInPassword" required>
+                    <button type="button" class="toggle-password">
+                        <i class="fas fa-eye"></i>
+                    </button>
                 </div>
             </div>
-        `;
-    }
 
-    calculateStreamingEarnings() {
-        const platform = document.getElementById('streamPlatform').value;
-        const streams = parseInt(document.getElementById('streams').value) || 0;
-        const rate = STREAMING_RATES[platform].rate;
-        const earnings = streams * rate;
+            <div class="form-actions">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
 
-        document.getElementById('streamResult').innerHTML = `
-            <div class="streaming-earnings-card">
-                <h3>${STREAMING_RATES[platform].name} Revenue</h3>
-                <div class="amount">$${earnings.toFixed(2)}</div>
-                <div class="converted-amounts">
-                    ${this.renderCurrencyConversions(earnings)}
+            <button type="submit" class="auth-button">
+                <i class="fas fa-sign-in-alt"></i>
+                Sign In
+            </button>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form id="signupForm" class="auth-form">
+            <h2>Create Account</h2>
+
+            
+            <div class="form-group">
+                <label for="surname">Username </label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="surname" required>
                 </div>
             </div>
-        `;
-    }
 
-    renderCurrencyConversions(amount) {
-        return this.state.selectedCurrencies.map(code => {
-            const rate = this.state.exchange[code] || 1;
-            const converted = amount * rate;
-            const currency = AVAILABLE_CURRENCIES[code];
-            return `
-                <div class="currency-conversion">
-                    <span>${currency.symbol}${converted.toFixed(2)} ${code}</span>
-                </div>
-            `;
-        }).join('');
-    }
-
-    generatePrediction(match) {
-        const confidence = Math.random();
-        return {
-            match: match.title,
-            prediction: confidence > 0.7 ? 'Strong Buy' : 'Hold',
-            confidence: (confidence * 100).toFixed(2),
-            odds: (1 + confidence).toFixed(2)
-        };
-    }
-
-    renderPredictions() {
-        const grid = document.getElementById('predictionsGrid');
-        if (!grid) return;
-
-        const predictions = this.state.sports.map(match => this.generatePrediction(match));
-
-        grid.innerHTML = predictions.map(pred => `
-            <div class="prediction-card">
-                <div class="prediction-header">
-                    <h3>${pred.match}</h3>
-                    <span class="confidence-badge">${pred.confidence}%</span>
-                </div>
-                <div class="prediction-details">
-                    <p>Prediction: ${pred.prediction}</p>
-                    <p>Odds: ${pred.odds}</p>
+            <div class="form-group">
+                <label for="profilePhoto">Profile Photo</label>
+                <div class="photo-upload-wrapper">
+                    <input type="file" id="profilePhoto" accept="image/*" required>
+                    <div class="photo-preview">
+                        <img id="photoPreview" src="placeholder.jpg" alt="Profile Preview">
+                    </div>
+                    <button type="button" class="upload-btn">
+                        <i class="fas fa-camera"></i>
+                        Upload Photo
+                    </button>
                 </div>
             </div>
-        `).join('');
-    }
 
-    updateLastRefreshTime() {
-        const element = document.getElementById('lastUpdate');
-        if (element && this.state.lastUpdate) {
-            element.textContent = `Last updated: ${this.state.lastUpdate.toLocaleTimeString()}`;
-        }
-    }
+            <div class="form-group">
+                <label for="signUpEmail">Email</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="signUpEmail" required>
+                </div>
+            </div>
 
-    loadFallbackData() {
-        this.state = {
-            ...this.state,
-            crypto: [
-                { name: 'Bitcoin', symbol: 'BTC', priceUsd: '45000', changePercent24Hr: '2.5' },
-                { name: 'Ethereum', symbol: 'ETH', priceUsd: '3000', changePercent24Hr: '1.8' }
-            ],
-            exchange: { EUR: 0.85, GBP: 0.73, NGN: 411 },
-            music: [],
-            sports: [],
-            lastUpdate: new Date()
-        };
-        this.renderAll();
-    }
+            <div class="form-group">
+                <label for="signUpPassword">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="signUpPassword" required>
+                    <button type="button" class="toggle-password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <div class="password-strength">
+                    <div class="strength-meter"></div>
+                    <span class="strength-text"></span>
+                </div>
+            </div>
 
-    setupEventListeners() {
-        document.getElementById('calculateBtn')?.addEventListener('click',
-            () => this.calculateEarnings());
-        document.getElementById('calculateStreamBtn')?.addEventListener('click',
-            () => this.calculateStreamingEarnings());
-        document.getElementById('refreshBtn')?.addEventListener('click',
-            () => this.loadAllData());
-        document.getElementById('predictionType')?.addEventListener('change',
-            (e) => this.updatePredictions(e.target.value));
-    }
+            <div class="form-group">
+                <label>Role Selection</label>
+                <div class="role-toggle">
+                    <input type="radio" id="roleStudent" name="role" value="student" checked>
+                    <label for="roleStudent">Student</label>
+                    <input type="radio" id="roleHOC" name="role" value="hoc">
+                    <label for="roleHOC">HOC</label>
+                </div>
+            </div>
 
-    startAutoRefresh() {
-        setInterval(() => this.loadAllData(), API_CONFIG.cache.duration);
-    }
-}
+            <button type="submit" class="auth-button">
+                <i class="fas fa-user-plus"></i>
+                Create Account
+            </button>
+        </form>
 
-// Initialize Application
-document.addEventListener('DOMContentLoaded', () => {
-    window.app = new CryptoHub();
-});
+        
+    </div>
 
-   </script>
-   <script type='text/javascript' src='//causingparameterfavour.com/d2/d1/6a/d2d16af78c4e4bc865169db67bd8784f.js'></script> 
-</body>
-</html>
+   
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+    <div class="dashboard-container">
+        <!-- HOC Dashboard -->
+        <div class="hoc-dashboard" id="hocDashboard">
+            <nav class="dashboard-nav">
+                <div class="nav-brand">
+                    <img src="assets/images/lasu-logo.png" alt="LASU Logo">
+                    <span>LASU Attendance System</span>
+                </div>
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="create">
+                        <i class="fas fa-plus-circle"></i> Create
+                    </button>
+                    <button class="nav-tab" data-tab="created">
+                        <i class="fas fa-list"></i> Created
+                    </button>
+                    <button class="nav-tab" data-tab="verify">
+                        <i class="fas fa-check-circle"></i> Verify Transactions
+                    </button>
+                </div>
+                <div class="nav-profile">
+                    <div class="profile-info">
+                        <img src="" alt="HOC Profile" id="hocProfileImage">
+                        <span class="hoc-name" id="hocName"></span>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </nav>
+    
+            <!-- Create Tab Content -->
+            <div class="tab-content active" id="createTab">
+                <div class="create-space-form">
+                    <h2><i class="fas fa-plus-circle"></i> Create New Attendance Space</h2>
+                    <form id="spaceCreationForm">
+                        <div class="form-group">
+                            <label>Space Name</label>
+                            <input type="text" id="spaceName" required placeholder="e.g., History 101 - Semester 1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Space Password (Optional)</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="spacePassword" placeholder="Set access password">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label>Courses (Minimum 2)</label>
+                            <div class="course-inputs" id="courseInputs">
+                                <div class="course-input-wrapper">
+                                    <input type="text" class="course-input" placeholder="Course 1" required>
+                                    <button type="button" class="remove-course-btn" disabled>
+                                        <i class="fas fa-minus-circle"></i>
+                                    </button>
+                                </div>
+                                <div class="course-input-wrapper">
+                                    <input type="text" class="course-input" placeholder="Course 2" required>
+                                    <button type="button" class="remove-course-btn" disabled>
+                                        <i class="fas fa-minus-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" class="add-course-btn" id="addCourseBtn">
+                                <i class="fas fa-plus"></i> Add Course
+                            </button>
+                        </div>
+    
+                        <div class="form-group">
+                            <label>Space Color</label>
+                            <div class="color-picker">
+                                <input type="color" id="spaceColor" value="#4f46e5">
+                                <span class="color-preview"></span>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label>Timers</label>
+                            <div class="timer-settings">
+                                <select class="course-timer" id="courseTimer" required>
+                                    <option value="">Select Course Timer</option>
+                                    <option value="24">24 hours</option>
+                                    <option value="48">48 hours</option>
+                                    <option value="72">72 hours</option>
+                                </select>
+                                <select class="space-timer" id="spaceTimer" required>
+                                    <option value="">Select Space Timer</option>
+                                    <option value="24">24 hours</option>
+                                    <option value="48">48 hours</option>
+                                    <option value="96">4 days</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label>Auto-Sign Feature</label>
+                            <div class="auto-sign-toggle">
+                                <input type="checkbox" id="autoSignToggle">
+                                <label for="autoSignToggle">Enable Auto-Sign for Students</label>
+                            </div>
+                        </div>
+    
+                        <button type="submit" class="create-space-btn">
+                            <i class="fas fa-plus-circle"></i> Create Space
+                        </button>
+                    </form>
+                </div>
+            </div>
+    
+            [Rest of the HTML remains the same but with added icons and IDs for JavaScript functionality]
+        </div>
+    </div>
+    <div class="dashboard-container2">
+        <div class="student-dashboard" id="studentDashboard">
+            <nav class="dashboard-nav">
+                <div class="nav-brand">
+                    <img src="assets/images/lasu-logo.png" alt="LASU Logo">
+                    <span>LASU Attendance System</span>
+                </div>
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="spaces">
+                        <i class="fas fa-th-large"></i> Spaces
+                    </button>
+                    <button class="nav-tab" data-tab="vouchers">
+                        <i class="fas fa-ticket-alt"></i> Vouchers
+                    </button>
+                    <button class="nav-tab" data-tab="pinned">
+                        <i class="fas fa-thumbtack"></i> Pinned
+                    </button>
+                    <button class="nav-tab" data-tab="auto-sign">
+                        <i class="fas fa-signature"></i> Auto Sign
+                    </button>
+                </div>
+                <div class="nav-profile">
+                    <div class="profile-info">
+                        <img src="" alt="Student Profile" id="studentProfileImage">
+                        <div class="student-details">
+                            <span class="student-name" id="studentName"></span>
+                            <span class="matric-number" id="matricNumber"></span>
+                        </div>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </nav>
+    
+            <!-- Spaces Tab -->
+            <div class="tab-content active" id="spacesTab">
+                <div class="space-search">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="search" id="spaceSearch" placeholder="Search spaces or courses...">
+                    </div>
+                    <div class="filter-wrapper">
+                        <select id="spaceFilter">
+                            <option value="all">All Spaces</option>
+                            <option value="active">Active</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="expired">Expired</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="available-spaces" id="spacesList"></div>
+            </div>
+    
+            <!-- Vouchers Tab -->
+            <div class="tab-content" id="vouchersTab">
+                <div class="voucher-types">
+                    <h2><i class="fas fa-ticket-alt"></i> Purchase Vouchers</h2>
+                    <div class="voucher-cards">
+                        <div class="voucher-card regular">
+                            <div class="voucher-header">
+                                <h3>Regular Voucher</h3>
+                                <span class="validity">48 Hours</span>
+                            </div>
+                            <div class="voucher-features">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Fill up to 2 forms daily</li>
+                                    <li><i class="fas fa-check"></i> 6 edits per form</li>
+                                    <li><i class="fas fa-check"></i> Valid for 48 hours</li>
+                                </ul>
+                            </div>
+                            <div class="voucher-price">
+                                <span class="price">₦25</span>
+                            </div>
+                            <button class="purchase-btn" data-type="regular">
+                                <i class="fas fa-shopping-cart"></i> Purchase
+                            </button>
+                        </div>
+    
+                        <div class="voucher-card monthly">
+                            <div class="voucher-header">
+                                <h3>30-Day Voucher</h3>
+                                <span class="validity">30 Days</span>
+                            </div>
+                            <div class="voucher-features">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Fill up to 7 forms daily</li>
+                                    <li><i class="fas fa-check"></i> Unlimited edits</li>
+                                    <li><i class="fas fa-check"></i> Valid for 30 days</li>
+                                </ul>
+                            </div>
+                            <div class="voucher-price">
+                                <span class="price">₦150</span>
+                            </div>
+                            <button class="purchase-btn" data-type="monthly">
+                                <i class="fas fa-shopping-cart"></i> Purchase
+                            </button>
+                        </div>
+    
+                        <div class="voucher-card premium">
+                            <div class="voucher-header">
+                                <h3>6-Month Voucher</h3>
+                                <span class="validity">180 Days</span>
+                            </div>
+                            <div class="voucher-features">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Fill up to 7 forms daily</li>
+                                    <li><i class="fas fa-check"></i> Unlimited edits</li>
+                                    <li><i class="fas fa-check"></i> Valid for 6 months</li>
+                                </ul>
+                            </div>
+                            <div class="voucher-price">
+                                <span class="price">₦700</span>
+                            </div>
+                            <button class="purchase-btn" data-type="premium">
+                                <i class="fas fa-shopping-cart"></i> Purchase
+                            </button>
+                        </div>
+                    </div>
+    
+                    <div class="my-vouchers">
+                        <h3><i class="fas fa-wallet"></i> My Vouchers</h3>
+                        <div class="voucher-list" id="voucherList"></div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Pinned Tab -->
+            <div class="tab-content" id="pinnedTab">
+                <div class="pinned-spaces" id="pinnedSpacesList"></div>
+            </div>
+    
+            <!-- Auto Sign Tab -->
+            <div class="tab-content" id="autoSignTab">
+                <div class="auto-sign-wrapper">
+                    <h2><i class="fas fa-signature"></i> Auto Sign Subscription</h2>
+                    <div class="subscription-cards">
+                        <div class="subscription-card">
+                            <h3>5 Days Auto-Sign</h3>
+                            <span class="price">₦600</span>
+                            <button class="subscribe-btn" data-duration="5">Subscribe</button>
+                        </div>
+                        <div class="subscription-card">
+                            <h3>20 Days Auto-Sign</h3>
+                            <span class="price">₦3100</span>
+                            <button class="subscribe-btn" data-duration="20">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Attendance Form Modal -->
+    <div class="modal" id="attendanceFormModal">
+        <div class="modal-content">
+            <!-- Form content will be dynamically inserted -->
+        </div>
+    </div>
+    
+    
+    </body>
+    </html>
+    
