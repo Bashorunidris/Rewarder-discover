@@ -35960,41 +35960,31 @@ const durationPricing = {
     30: 250  // 30 days = ₦250
 };
 
-const promoCodes = {
-    "RRIS2025": { 
+const boostCodes = {
+    "BOOST20": { 
         discount: 20, 
         type: "percentage", 
-        usage: 2, 
-        activateAfterCampaigns: 2,
-        description: "20% off for next 2 campaigns" 
+        description: "20% off boost ads package" 
     },
-    "IsmartDC": { 
+    "ADMIN100": { 
         discount: 100, 
         type: "percentage", 
-        usage: -1, // unlimited for admin testing
-        activateAfterCampaigns: 0,
-        description: "100% off - Admin code" 
+        description: "100% off - Admin boost code" 
     },
-    "Bisask": { 
+    "BOOST30": { 
         discount: 30, 
         type: "percentage", 
-        usage: 2, 
-        activateAfterCampaigns: 3,
-        description: "30% off for 3rd campaign onwards" 
+        description: "30% off boost ads package" 
     },
-    "Rewarder": { 
+    "BOOST50": { 
         discount: 50, 
         type: "percentage", 
-        usage: 2, 
-        activateAfterCampaigns: 5,
-        description: "50% off for 5th campaign onwards" 
+        description: "50% off boost ads package" 
     },
-    "off10": { 
+    "BOOST10": { 
         discount: 10, 
         type: "percentage", 
-        usage: 31, 
-        activateAfterCampaigns: 6,
-        description: "10% off for 1 month after 6 campaigns" 
+        description: "10% off boost ads package" 
     }
 };
 
@@ -36303,13 +36293,13 @@ function generatePaymentTabContent() {
         </div>
 
         <div class="boost-form-section">
-            <h3><i class="fas fa-tag"></i> Promo Code</h3>
+            <h3><i class="fas fa-tag"></i> Boost Code</h3>
             <div class="boost-form-group">
-                <input type="text" id="promo-code" class="boost-form-control" 
-                       placeholder="Enter promo code (optional)" 
-                       onchange="handlePromoCodeChange()" 
-                       onkeyup="handlePromoCodeChange()">
-                <div id="promo-message" style="margin-top: 8px; font-size: 14px;"></div>
+                <input type="text" id="boost-code" class="boost-form-control" 
+                       placeholder="Enter boost code (optional)" 
+                       onchange="handleBoostCodeChange()" 
+                       onblur="validateBoostCode()">
+                <div id="boost-message" style="margin-top: 8px; font-size: 14px;"></div>
             </div>
         </div>
     `;
@@ -36514,14 +36504,14 @@ function calculateBoostPrice() {
     return total;
 }
 
-// Validate promo code with campaign count check
-async function validatePromoCode() {
-    const promoInput = document.getElementById('promo-code');
-    const messageDiv = document.getElementById('promo-message');
+// Simplified boost code validation - just check if code exists
+function validateBoostCode() {
+    const boostInput = document.getElementById('boost-code');
+    const messageDiv = document.getElementById('boost-message');
     
-    if (!promoInput || !messageDiv) return;
+    if (!boostInput || !messageDiv) return;
     
-    const code = promoInput.value.trim().toUpperCase();
+    const code = boostInput.value.trim().toUpperCase();
     
     if (!code) {
         messageDiv.innerHTML = '';
@@ -36529,60 +36519,26 @@ async function validatePromoCode() {
         return;
     }
     
-    const promo = promoCodes[code];
-    if (!promo) {
+    const boost = boostCodes[code];
+    
+    if (!boost) {
         messageDiv.innerHTML = `
             <div style="color: #dc3545; display: flex; align-items: center; gap: 6px;">
                 <i class="fas fa-times-circle"></i>
-                Invalid promo code
+                Invalid boost code
             </div>
         `;
+        calculateBoostPrice();
         return;
     }
     
-    // Check if user has enough campaigns to unlock this code
-    const userCampaignCount = await getUserCampaignCount();
-    
-    if (userCampaignCount < promo.activateAfterCampaigns) {
-        messageDiv.innerHTML = `
-            <div style="color: #ffc107; display: flex; align-items: center; gap: 6px;">
-                <i class="fas fa-lock"></i>
-                Code unlocks after ${promo.activateAfterCampaigns} campaigns. You have ${userCampaignCount}.
-            </div>
-        `;
-        return;
-    }
-    
-    // Check usage limits (except for unlimited codes)
-    if (promo.usage !== -1) {
-        const usageCount = await getPromoCodeUsageCount(code);
-        if (usageCount >= promo.usage) {
-            messageDiv.innerHTML = `
-                <div style="color: #dc3545; display: flex; align-items: center; gap: 6px;">
-                    <i class="fas fa-times-circle"></i>
-                    Code usage limit reached (${promo.usage}/${promo.usage})
-                </div>
-            `;
-            return;
-        }
-        
-        // Show remaining uses
-        const remainingUses = promo.usage - usageCount;
-        messageDiv.innerHTML = `
-            <div style="color: #28a745; display: flex; align-items: center; gap: 6px;">
-                <i class="fas fa-check-circle"></i>
-                Valid! ${promo.discount}% off applied (${remainingUses} uses left)
-            </div>
-        `;
-    } else {
-        // Unlimited usage (admin code)
-        messageDiv.innerHTML = `
-            <div style="color: #28a745; display: flex; align-items: center; gap: 6px;">
-                <i class="fas fa-check-circle"></i>
-                Valid! ${promo.discount}% off applied (unlimited)
-            </div>
-        `;
-    }
+    // Code is valid - show success message
+    messageDiv.innerHTML = `
+        <div style="color: #28a745; display: flex; align-items: center; gap: 6px;">
+            <i class="fas fa-check-circle"></i>
+            Valid! ${boost.discount}% off applied - ${boost.description}
+        </div>
+    `;
     
     calculateBoostPrice();
 }
@@ -36639,36 +36595,29 @@ async function getPromoCodeUsageCount(promoCode) {
     }
 }
 
-// Handle promo code change (wrapper for async validation)
-function handlePromoCodeChange() {
-    validatePromoCode().catch(error => {
-        console.error('Error validating promo code:', error);
-        const messageDiv = document.getElementById('promo-message');
-        if (messageDiv) {
-            messageDiv.innerHTML = `
-                <div style="color: #dc3545; display: flex; align-items: center; gap: 6px;">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    Error validating code. Please try again.
-                </div>
-            `;
-        }
-    });
+// Handle boost code change with delay to avoid errors while typing
+let boostCodeTimeout;
+function handleBoostCodeChange() {
+    clearTimeout(boostCodeTimeout);
+    boostCodeTimeout = setTimeout(() => {
+        validateBoostCode();
+    }, 500); // Wait 500ms after user stops typing
 }
 
-// Calculate promo discount
+// Calculate boost discount
 function calculatePromoDiscount(subtotal) {
-    const promoInput = document.getElementById('promo-code');
-    if (!promoInput) return 0;
+    const boostInput = document.getElementById('boost-code');
+    if (!boostInput) return 0;
     
-    const code = promoInput.value.trim().toUpperCase();
-    const promo = promoCodes[code];
+    const code = boostInput.value.trim().toUpperCase();
+    const boost = boostCodes[code];
     
-    if (!promo) return 0;
+    if (!boost) return 0;
     
-    if (promo.type === 'percentage') {
-        return Math.floor(subtotal * (promo.discount / 100));
+    if (boost.type === 'percentage') {
+        return Math.floor(subtotal * (boost.discount / 100));
     } else {
-        return Math.min(promo.discount, subtotal);
+        return Math.min(boost.discount, subtotal);
     }
 }
 
