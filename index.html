@@ -8,7 +8,7 @@
   <h2>Buy Talent Coins</h2>
   <label for="amount">Select amount:</label>
   <select id="amount">
-    <option value="150">10 Coins - ₦150</option>
+    <option value="50">10 Coins - ₦50</option>
     <option value="300">20 Coins - ₦300</option>
     <option value="750">50 Coins - ₦750</option>
   </select>
@@ -32,7 +32,7 @@
           phonenumber: "08000000000",
           name: "Talent Coin Buyer"
         },
-        redirect_url: "https://huss-view.vercel.app/payment-status.html?coins=" + coins,
+        redirect_url: "https://huss-view.vercel.app ?coins=" + coins,
         customizations: {
           title: "Talent Coin Purchase",
           description: `Buying ${coins} coins`,
