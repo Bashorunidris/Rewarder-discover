@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rewarder - Event Creation Banner</title>
+    <title>Rewarder - Professional Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -15,8 +15,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 100%);
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -25,275 +25,316 @@
         }
 
         .banner-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            max-width: 1000px;
-            width: 100%;
+            width: 600px;
+            height: 600px;
             position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         }
 
         .banner-content {
-            padding: 40px 50px;
-            text-align: center;
-            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4e 50%, #4a4a6e 100%);
-            color: white;
+            width: 100%;
+            height: 100%;
             position: relative;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d1b69 50%, #11998e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
             overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
         }
 
         .banner-content::before {
             content: '';
             position: absolute;
             top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: float 20s ease-in-out infinite;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .banner-content::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -30%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite reverse;
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20px, -20px) scale(1.1); }
         }
 
-        .logo {
-            margin-bottom: 10px;
+        .header-section {
+            text-align: center;
             position: relative;
-            z-index: 2;
+            z-index: 10;
+        }
+
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            gap: 15px;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 12px;
         }
 
         .logo-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-            transition: transform 0.3s ease;
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.2);
         }
 
-        .logo-img:hover {
-            transform: scale(1.1);
+        .brand-name {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ffd700, #fff, #ffd700);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+            text-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
         }
 
-        .logo-text {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: #ffd700;
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .tagline {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .main-headline {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            line-height: 1.3;
-            position: relative;
-            z-index: 2;
-        }
-
-        .highlight-text {
-            color: #ffd700;
-            font-weight: bold;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
-            position: relative;
-            z-index: 2;
-        }
-
-        .feature-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 10px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .feature-icon {
-            font-size: 1.5rem;
-            color: #ffd700;
-            margin-bottom: 8px;
-        }
-
-        .feature-title {
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .feature-desc {
-            font-size: 0.7rem;
-            opacity: 0.8;
-            line-height: 1.4;
-        }
-
-        .trust-section {
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 25px 0;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            position: relative;
-            z-index: 2;
-        }
-
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .trust-icon {
-            font-size: 1.5rem;
-            color: #ffd700;
-            margin-right: 10px;
-        }
-
-        .trust-text {
-            font-size: 0.85rem;
-            line-height: 1.5;
-            text-align: center;
-        }
-
-        .left-column {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: left;
-            position: relative;
-            z-index: 2;
-        }
-
-        .right-column {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .cta-section {
-            text-align: left;
-            margin-top: 25px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            color: #1a1a2e;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
             font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-        }
-
-        .website-url {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .website-url:hover {
-            background: rgba(255, 215, 0, 0.1);
-            border-color: rgba(255, 215, 0, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .website-url i {
-            color: #ffd700;
-            font-size: 1.1rem;
-        }
-
-        .url-text {
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
             letter-spacing: 0.5px;
         }
 
-        .sponsor-invite {
-            font-size: 0.8rem;
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border-left: 4px solid #ffd700;
-        }
-
-        .download-section {
-            padding: 20px;
-            background: #f8f9fa;
+        .main-content {
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
 
-        .download-btn {
-            background: #1a1a2e;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+        .headline {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 0px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+            margin-bottom: 16px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 20px 16px;
+            text-align: center;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature:hover::before {
+            left: 100%;
+        }
+
+        .feature-icon {
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .feature-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+
+       
+
+        .bottom-section {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+          margin-bottom: 20px;
+            margin-top: -10px;
+            gap: 12px;
+            box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+            position: relative;
+            z-index: 15;
+        }
+
+        .trust-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .trust-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 50px;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(255, 215, 0, 0.6);
+        }
+
+        .website-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50px;
+            padding: 10px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .website-link:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .website-icon {
+            color: #ffd700;
+        }
+
+        .download-section {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .download-btn {
+            background: #1a1a2e;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
         .download-btn:hover {
             background: #2d2d4e;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         .download-btn.downloading {
@@ -303,8 +344,8 @@
 
         .download-animation {
             display: none;
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border: 2px solid transparent;
             border-top: 2px solid white;
             border-radius: 50%;
@@ -316,171 +357,92 @@
             100% { transform: rotate(360deg); }
         }
 
-        .download-progress {
-            display: none;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: #ffd700;
-            border-radius: 0 0 10px 10px;
-            animation: progress 2s ease-out;
-        }
-
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
         .success-icon {
             display: none;
             color: #4caf50;
-            font-size: 1.2rem;
-            animation: bounceIn 0.5s ease;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        @media (max-width: 768px) {
-            .banner-container {
-                max-width: 600px;
-            }
-            
-            .banner-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                padding: 30px 20px;
-            }
-            
-            .left-column {
-                text-align: center;
-            }
-            
-            .logo {
-                justify-content: center;
-            }
-            
-            .cta-section {
-                text-align: center;
-            }
-            
-            .main-headline {
-                font-size: 1.5rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .banner-container {
-                max-width: 350px;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="banner-container" id="bannerContainer">
         <div class="banner-content">
-            <!-- Left Column -->
-            <div class="left-column">
-                <div class="logo">
+            <div class="header-section">
+                <div class="logo-container">
                     <img src="https://i.ibb.co/gM28qZpV/new-rewarder-logo.png" alt="Rewarder Logo" class="logo-img">
-                    <div class="logo-text">Rewarder</div>
+                    <div class="brand-name">Rewarder</div>
                 </div>
                 <div class="tagline">Your Event Creation & Ticket Selling Platform</div>
-                
-                <div class="main-headline">
-                    Create Events & <span class="highlight-text">Sell Tickets</span> Instantly!
-                </div>
-                
-                <div class="cta-section">
-                    <button class="cta-button">
-                        <i class="fas fa-rocket"></i> Start Creating Events
-                    </button>
-                    
-                    <div class="website-url" onclick="openWebsite()">
-                        <i class="fas fa-globe"></i>
-                        <span class="url-text">rewarder.vercel.app</span>
-                    </div>
-                </div>
             </div>
 
-            <!-- Right Column -->
-            <div class="right-column">
-                <div class="features-grid">
-                    <div class="feature-item">
+            <div class="main-content">
+                <div class="headline">
+                    Create Events
+                </div>
+
+                <div class="features">
+                    <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-plus-circle"></i>
                         </div>
                         <div class="feature-title">Create Events</div>
-                        <div class="feature-desc">Launch your event in minutes</div>
+                        <div class="feature-desc">Launch in minutes</div>
                     </div>
                     
-                    <div class="feature-item">
+                    <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-naira-sign"></i>
                         </div>
                         <div class="feature-title">As Low As ₦5</div>
-                        <div class="feature-desc">Minimal charges on sales</div>
+                        <div class="feature-desc">Minimal charges</div>
                     </div>
                     
-                    <div class="feature-item">
+                    <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="feature-title">24hr Withdrawals</div>
-                        <div class="feature-desc">Fast money transfers</div>
+                        <div class="feature-desc">Fast transfers</div>
                     </div>
                     
-                    <div class="feature-item">
+                    <div class="feature">
                         <div class="feature-icon">
                             <i class="fas fa-ticket-alt"></i>
                         </div>
                         <div class="feature-title">Instant Sales</div>
-                        <div class="feature-desc">Start selling immediately</div>
+                        <div class="feature-desc">Start selling now</div>
                     </div>
                 </div>
-                
-                <div class="trust-section">
-                     <span style="font-weight: bold;">Trusted by</span>
-                    <div class="trust-badge">
-                        <img src="https://i.ibb.co/F4yfjwzp/lasusu-games-logo.png" alt="Lasusu Games Logo" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
-                        <span style="font-weight: bold;">Lasusu Games</span>
-                    </div>
+                 <div class="trust-badge">
+                    <img src="https://i.ibb.co/F4yfjwzp/lasusu-games-logo.png" alt="Lasusu Games" class="trust-logo">
+                    <span class="trust-text">Trusted by Lasusu Games</span>
                 </div>
             </div>
 
+             
+           
+            <div class="bottom-section">
+                <div class="cta-container">
+                    <button class="cta-button">
+                        <i class="fas fa-rocket"></i>
+                        <span>Start Creating Events</span>
+                    </button>
+                    
+                    <a href="https://rewarder.vercel.app" target="_blank" class="website-link">
+                        <i class="fas fa-globe website-icon"></i>
+                        <span>rewarder.vercel.app</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        
-        <div class="download-section">
-            <button class="download-btn" onclick="downloadBanner()">
-                <i class="fas fa-download download-icon"></i>
-                <div class="download-animation"></div>
-                <i class="fas fa-check success-icon"></i>
-                <span class="download-text">Download PNG</span>
-                <div class="download-progress"></div>
-            </button>
-            
-            <button class="download-btn gif-btn" onclick="downloadGifBanner()" style="margin-left: 10px;">
-                <i class="fas fa-film download-icon"></i>
-                <div class="download-animation"></div>
-                <i class="fas fa-check success-icon"></i>
-                <span class="download-text">Download GIF</span>
-                <div class="download-progress"></div>
-            </button>
-        </div>
+    </div>
+
+    <div class="download-section">
+        <button class="download-btn" onclick="downloadBanner()">
+            <i class="fas fa-download download-icon"></i>
+            <div class="download-animation"></div>
+            <i class="fas fa-check success-icon"></i>
+            <span class="download-text">Download PNG</span>
+        </button>
     </div>
 
     <script>
@@ -490,7 +452,6 @@
             const downloadAnimation = btn.querySelector('.download-animation');
             const successIcon = btn.querySelector('.success-icon');
             const downloadText = btn.querySelector('.download-text');
-            const progressBar = btn.querySelector('.download-progress');
             
             // Start download animation
             btn.classList.add('downloading');
@@ -498,46 +459,34 @@
             downloadIcon.style.display = 'none';
             downloadAnimation.style.display = 'block';
             downloadText.textContent = 'Capturing...';
-            progressBar.style.display = 'block';
             
             try {
-                // Hide the download section temporarily for a cleaner capture
+                // Hide the download section temporarily
                 const downloadSection = document.querySelector('.download-section');
                 downloadSection.style.display = 'none';
                 
-                // Wait a bit for any animations to settle
+                // Wait for animations to settle
                 await new Promise(resolve => setTimeout(resolve, 500));
                 
-                // Capture the banner container exactly as it appears
+                // Capture the banner
                 const bannerContainer = document.getElementById('bannerContainer');
                 
                 const canvas = await html2canvas(bannerContainer, {
                     useCORS: true,
                     allowTaint: true,
-                    scale: 2, // Higher quality
+                    scale: 2,
                     backgroundColor: null,
                     logging: false,
-                    width: bannerContainer.offsetWidth,
-                    height: bannerContainer.offsetHeight,
-                    onclone: function(clonedDoc) {
-                        // Ensure the cloned document has all styles
-                        const clonedBanner = clonedDoc.getElementById('bannerContainer');
-                        if (clonedBanner) {
-                            clonedBanner.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.1)';
-                        }
-                    }
+                    width: 600,
+                    height: 600
                 });
                 
                 // Show download section again
-                downloadSection.style.display = 'block';
-                
-                // Update progress
-                downloadText.textContent = 'Processing...';
-                await new Promise(resolve => setTimeout(resolve, 800));
+                downloadSection.style.display = 'flex';
                 
                 // Create download link
                 const link = document.createElement('a');
-                link.download = 'rewarder-event-creation-banner.png';
+                link.download = 'rewarder-professional-banner.png';
                 link.href = canvas.toDataURL('image/png', 1.0);
                 
                 // Trigger download
@@ -557,15 +506,14 @@
                     downloadIcon.style.display = 'block';
                     successIcon.style.display = 'none';
                     downloadText.textContent = 'Download PNG';
-                    progressBar.style.display = 'none';
                 }, 2000);
                 
             } catch (error) {
                 console.error('Download error:', error);
                 
-                // Show download section again in case of error
+                // Show download section again
                 const downloadSection = document.querySelector('.download-section');
-                downloadSection.style.display = 'block';
+                downloadSection.style.display = 'flex';
                 
                 // Error state
                 downloadAnimation.style.display = 'none';
@@ -573,173 +521,10 @@
                 downloadText.textContent = 'Try Again';
                 btn.classList.remove('downloading');
                 btn.disabled = false;
-                progressBar.style.display = 'none';
                 
                 alert('Download failed. Please try again.');
             }
         }
-
-        async function downloadGifBanner() {
-            const btn = document.querySelector('.gif-btn');
-            const downloadIcon = btn.querySelector('.download-icon');
-            const downloadAnimation = btn.querySelector('.download-animation');
-            const successIcon = btn.querySelector('.success-icon');
-            const downloadText = btn.querySelector('.download-text');
-            const progressBar = btn.querySelector('.download-progress');
-            
-            // Start download animation
-            btn.classList.add('downloading');
-            btn.disabled = true;
-            downloadIcon.style.display = 'none';
-            downloadAnimation.style.display = 'block';
-            downloadText.textContent = 'Checking libraries...';
-            progressBar.style.display = 'block';
-            
-            try {
-                // Check if GIF library is loaded
-                if (typeof GIF === 'undefined') {
-                    throw new Error('GIF library not loaded. Please refresh the page and try again.');
-                }
-                
-                downloadText.textContent = 'Preparing banner...';
-                
-                // Hide the download section temporarily
-                const downloadSection = document.querySelector('.download-section');
-                downloadSection.style.display = 'none';
-                
-                // Wait for any animations to settle
-                await new Promise(resolve => setTimeout(resolve, 800));
-                
-                const bannerContainer = document.getElementById('bannerContainer');
-                
-                downloadText.textContent = 'Creating GIF...';
-                
-                // Create GIF with simpler settings
-                const gif = new GIF({
-                    workers: 1,
-                    quality: 20,
-                    width: Math.min(bannerContainer.offsetWidth, 400),
-                    height: Math.min(bannerContainer.offsetHeight, 600),
-                    workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js'
-                });
-                
-                downloadText.textContent = 'Capturing frames...';
-                
-                // Capture fewer frames to avoid memory issues
-                const totalFrames = 10;
-                
-                for (let i = 0; i < totalFrames; i++) {
-                    // Simple animation - just fade the CTA button
-                    const ctaButton = document.querySelector('.cta-button');
-                    const opacity = 0.7 + (Math.sin(i * 0.5) * 0.3);
-                    ctaButton.style.opacity = opacity;
-                    
-                    // Wait between frames
-                    await new Promise(resolve => setTimeout(resolve, 200));
-                    
-                    // Capture frame with smaller scale
-                    const canvas = await html2canvas(bannerContainer, {
-                        useCORS: false,
-                        allowTaint: false,
-                        scale: 0.8,
-                        backgroundColor: '#1a1a2e',
-                        logging: false,
-                        foreignObjectRendering: true
-                    });
-                    
-                    gif.addFrame(canvas, {delay: 500});
-                    
-                    // Update progress
-                    downloadText.textContent = `Frame ${i + 1}/${totalFrames}...`;
-                }
-                
-                // Reset button opacity
-                const ctaButton = document.querySelector('.cta-button');
-                ctaButton.style.opacity = '1';
-                
-                downloadText.textContent = 'Rendering GIF...';
-                
-                // Show download section again
-                downloadSection.style.display = 'block';
-                
-                // Handle GIF completion
-                gif.on('finished', function(blob) {
-                    try {
-                        // Create download link
-                        const link = document.createElement('a');
-                        link.download = 'rewarder-animated-banner.gif';
-                        link.href = URL.createObjectURL(blob);
-                        
-                        // Trigger download
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        
-                        // Success state
-                        downloadAnimation.style.display = 'none';
-                        successIcon.style.display = 'block';
-                        downloadText.textContent = 'GIF Downloaded!';
-                        
-                        // Reset after 3 seconds
-                        setTimeout(() => {
-                            btn.classList.remove('downloading');
-                            btn.disabled = false;
-                            downloadIcon.style.display = 'block';
-                            successIcon.style.display = 'none';
-                            downloadText.textContent = 'Download GIF';
-                            progressBar.style.display = 'none';
-                        }, 3000);
-                        
-                    } catch (downloadError) {
-                        console.error('Download error:', downloadError);
-                        throw downloadError;
-                    }
-                });
-                
-                gif.on('progress', function(p) {
-                    downloadText.textContent = `Rendering... ${Math.round(p * 100)}%`;
-                });
-                
-                // Start rendering
-                gif.render();
-                
-            } catch (error) {
-                console.error('GIF Download error:', error);
-                
-                // Show download section again
-                const downloadSection = document.querySelector('.download-section');
-                if (downloadSection) downloadSection.style.display = 'block';
-                
-                // Error state
-                downloadAnimation.style.display = 'none';
-                downloadIcon.style.display = 'block';
-                downloadText.textContent = 'Try Again';
-                btn.classList.remove('downloading');
-                btn.disabled = false;
-                progressBar.style.display = 'none';
-                
-                alert(`GIF download failed: ${error.message}. Try refreshing the page.`);
-            }
-        }
-
-        function openWebsite() {
-            window.open('https://rewarder.vercel.app', '_blank');
-        }
-
-        // Add some interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            const featureItems = document.querySelectorAll('.feature-item');
-            
-            featureItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px) scale(1.02)';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-        });
     </script>
 </body>
 </html>
